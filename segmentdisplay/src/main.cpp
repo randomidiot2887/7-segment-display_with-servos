@@ -1,8 +1,17 @@
+// Code libraries included with the program. required to run the program
+// These are Arduino.h to be able to use functions for the arduino IDE 
+// AND Servo.h to be able to use servos with the arduino.
+// This sections #include <Arduino.h> which can be removed to make the program compatable with the arduino IDE.
+// This program was coded in Visual Studio Code with PlatformIO
+// This program was coded by @randomidiot2887.
 #include <Arduino.h>
 #include <Servo.h>
 
+// Constant that stores the total number of servos connected to the arduino
+// Should be 7 as im intended to use it with 7 servos
+const int NUM_SERVOS = 7;
 // Object declarations
-Servo servo_object[7];
+Servo servo_object[NUM_SERVOS];
 // Servo layout
 // - Servo 1 at Pin 3
 // - Servo 2 at Pin 4
@@ -11,18 +20,21 @@ Servo servo_object[7];
 // - Servo 5 at Pin 7
 // - Servo 6 at Pin 8
 // - Servo 7 at Pin 9
-const int servos[7] = {3, 4, 5, 6, 7, 8, 9};
-// Constant that stores the total number of servos connected to the arduino
-// Should be 7 as im intended to use it with 7 servos
-const int NUM_SERVOS = 7;
+const int servos[NUM_SERVOS] = {3, 4, 5, 6, 7, 8, 9};
 // Constant that stores the maximum angle to which the servos will open to
 // Range is from 0 to 180
 const int max_servo_open=180;
+// Constant that stores the minimum angle to which the servos will open to
+// Range is from 0 to 180
+const int min_servo_open=0;
 // Constant that stores the serial baud to output serial at
 const int baud=9600;
 // Constant that declares the delay between the switching of servos to try and reduce power draw
 const int time=100;
-
+// Constant that contains the delay used by the subroutine blinkStatus()
+// Value must be greater then 0. 
+// input is in milliseconds. 1 second is equal to 1000 milliseconds
+const int debug_led_blink_time = 100;
 // =======================================
 // Section of code that contains functions and procedures required to run the code
 
@@ -32,9 +44,9 @@ const int time=100;
 void blinkStatus(int times) {
   for (int i = 0; i < times; i++) {
     digitalWrite(LED_BUILTIN, HIGH);
-    delay(100);
+    delay(debug_led_blink_time);
     digitalWrite(LED_BUILTIN, LOW);
-    delay(100);
+    delay(debug_led_blink_time);
   }
 }
 
@@ -45,6 +57,9 @@ void blinkStatus(int times) {
 // if number is 10, itll be equivelent to clearning the screen
 // if number is less then 0 or greater then 10, the procedure WILL BREAK
 void display_num(int num=10) {
+  // Serial signal for debugging
+  // Sends in format "Procedure display_num invoked with paremeter {num}"
+  Serial.print("Procedure display_num invoked with paremeter "); Serial.println(num);
   // Case that handles the procedures the procedure will run depending on the input
   switch (num) {
     case 10:
@@ -56,15 +71,26 @@ void display_num(int num=10) {
       }
       break;
     // Values that change the contents of the display
+    case 0:
+      // Displaying the number 0
+      // By enabling servos 1, 2, 4, 5, 6 & 7
+      servo_object[0].write(max_servo_open); delay(time); // Digit 1
+      servo_object[1].write(max_servo_open); delay(time); // Digit 2
+      servo_object[2].write(min_servo_open); delay(time); // Digit 3
+      servo_object[3].write(max_servo_open); delay(time); // Digit 4
+      servo_object[4].write(max_servo_open); delay(time); // Digit 5
+      servo_object[5].write(max_servo_open); delay(time); // Digit 6
+      servo_object[6].write(max_servo_open); delay(time); // Digit 7
+      break;
     case 1:
       // Displaying the number 1
       // By enabling servos 2 and 6
-      servo_object[0].write(0); delay(time);              // Digit 7
-      servo_object[1].write(0); delay(time);              // Digit 7
-      servo_object[2].write(max_servo_open); delay(time); // Digit 7
-      servo_object[3].write(0); delay(time);              // Digit 7
-      servo_object[4].write(0); delay(time);              // Digit 7
-      servo_object[5].write(0); delay(time);              // Digit 7
+      servo_object[0].write(min_servo_open); delay(time); // Digit 1
+      servo_object[1].write(min_servo_open); delay(time); // Digit 2
+      servo_object[2].write(max_servo_open); delay(time); // Digit 3
+      servo_object[3].write(min_servo_open); delay(time); // Digit 4
+      servo_object[4].write(min_servo_open); delay(time); // Digit 5
+      servo_object[5].write(min_servo_open); delay(time); // Digit 6
       servo_object[6].write(max_servo_open); delay(time); // Digit 7
       break;
     case 2:
@@ -75,8 +101,8 @@ void display_num(int num=10) {
       servo_object[2].write(max_servo_open); delay(time); // Digit 3
       servo_object[3].write(max_servo_open); delay(time); // Digit 4
       servo_object[4].write(max_servo_open); delay(time); // Digit 5
-      servo_object[5].write(0); delay(time);              // Digit 6
-      servo_object[6].write(0); delay(time);              // Digit 7
+      servo_object[5].write(min_servo_open); delay(time); // Digit 6
+      servo_object[6].write(min_servo_open); delay(time); // Digit 7
       break;
     case 3:
       // Displaying the number 3
@@ -84,19 +110,19 @@ void display_num(int num=10) {
       servo_object[0].write(max_servo_open); delay(time); // Digit 1
       servo_object[1].write(max_servo_open); delay(time); // Digit 2
       servo_object[2].write(max_servo_open); delay(time); // Digit 3
-      servo_object[3].write(0); delay(time);              // Digit 4
+      servo_object[3].write(min_servo_open); delay(time); // Digit 4
       servo_object[4].write(max_servo_open); delay(time); // Digit 5
       servo_object[5].write(max_servo_open); delay(time); // Digit 6
-      servo_object[6].write(0); delay(time);              // Digit 7
+      servo_object[6].write(min_servo_open); delay(time); // Digit 7
       break;
     case 4:
       // Displaying the number 4
       // By enabling servos 2, 3, 6 & 7
-      servo_object[0].write(0); delay(time);              // Digit 1
+      servo_object[0].write(min_servo_open); delay(time); // Digit 1
       servo_object[1].write(max_servo_open); delay(time); // Digit 2
       servo_object[2].write(max_servo_open); delay(time); // Digit 3
-      servo_object[3].write(0); delay(time);              // Digit 4
-      servo_object[4].write(0); delay(time);              // Digit 5
+      servo_object[3].write(min_servo_open); delay(time); // Digit 4
+      servo_object[4].write(min_servo_open); delay(time); // Digit 5
       servo_object[5].write(max_servo_open); delay(time); // Digit 6
       servo_object[6].write(max_servo_open); delay(time); // Digit 7
       break;
@@ -104,9 +130,9 @@ void display_num(int num=10) {
       // Displaying the number 5
       // By enabling servos 1, 3, 5, 6 & 7
       servo_object[0].write(max_servo_open); delay(time); // Digit 1
-      servo_object[1].write(0); delay(time);              // Digit 2
+      servo_object[1].write(min_servo_open); delay(time); // Digit 2
       servo_object[2].write(max_servo_open); delay(time); // Digit 3
-      servo_object[3].write(0); delay(time);              // Digit 4
+      servo_object[3].write(min_servo_open); delay(time); // Digit 4
       servo_object[4].write(max_servo_open); delay(time); // Digit 5
       servo_object[5].write(max_servo_open); delay(time); // Digit 6
       servo_object[6].write(max_servo_open); delay(time); // Digit 7
@@ -115,7 +141,7 @@ void display_num(int num=10) {
       // Displaying the number 6
       // By enabling servos 1, 3, 4, 5, 6 & 7
       servo_object[0].write(max_servo_open); delay(time); // Digit 1
-      servo_object[1].write(0); delay(time);              // Digit 2
+      servo_object[1].write(min_servo_open); delay(time); // Digit 2
       servo_object[2].write(max_servo_open); delay(time); // Digit 3
       servo_object[3].write(max_servo_open); delay(time); // Digit 4
       servo_object[4].write(max_servo_open); delay(time); // Digit 5
@@ -127,11 +153,11 @@ void display_num(int num=10) {
       // By enabling servos 1, 2 & 6
       servo_object[0].write(max_servo_open); delay(time); // Digit 1
       servo_object[1].write(max_servo_open); delay(time); // Digit 2
-      servo_object[2].write(0); delay(time);              // Digit 3
-      servo_object[3].write(0); delay(time);              // Digit 4
-      servo_object[4].write(0); delay(time);              // Digit 5
+      servo_object[2].write(min_servo_open); delay(time); // Digit 3
+      servo_object[3].write(min_servo_open); delay(time); // Digit 4
+      servo_object[4].write(min_servo_open); delay(time); // Digit 5
       servo_object[5].write(max_servo_open); delay(time); // Digit 6
-      servo_object[6].write(0); delay(time);              // Digit 7
+      servo_object[6].write(min_servo_open); delay(time); // Digit 7
       break;
   }
   // Blinks the debug LED once to help with visual debugging
@@ -154,16 +180,35 @@ void setup() {
     blinkStatus(1);
   }
   blinkStatus(10);
+  // Resets the servo positions back to the default position, basically resets the display
+  // Uses the display_num subroutine with the number 10 as a parameter
+  // 10 refers to the clear screen option
+  display_num(10);
   // Prints a message in serial that states the number of servos initialised succesfully
   // Also displays more imformation that notifies the usert that the servo has finished the void setup state
   Serial.print("Succesfully initialised "); Serial.print(NUM_SERVOS); Serial.println(" Servos as Servos"); Serial.println("Setup code finished");
-  blinkStatus(1);
 } 
 
 // Code that runs as a loop, repeating for as long as the arduino is running
 // Is used to toggle the servos to their desired positions
 // Dont mess with this after its coded. please?
 void loop() {
-  // put your main code here, to run repeatedly:
+  // Basically lets make it go through the numbers zero to nine and repeat...
+  // Im going to use a for loop here, where it increments from zero to nine then resets back to 0 and repeats.
+  for (int i=0; i<10; i++) {
+    // Increments the number on the Servo display by one
+    // Then waits for 1000ms (1.0s)
+    // Then repeats
+    display_num(i);
+    // Sends a signal via serial used for debugging
+    // In format "Made servos display number {i} Succesfully"
+    Serial.print("Made servos display number "); Serial.print(i); Serial.println(" Succesfully");
+    delay(1000);
+  }
+  // Sends serial sigmal used for debugging
+  // In format "Looping"
+  Serial.println("Looping");
+  // Blinks the debug LED once
+  blinkStatus(1);
+  
 }
-
