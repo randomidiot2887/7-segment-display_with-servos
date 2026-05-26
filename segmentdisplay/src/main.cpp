@@ -34,7 +34,7 @@ const int min_servo_open=0;
 // Constant that stores the serial baud to output serial at
 const int baud=9600;
 // Constant that declares the delay between the switching of servos to try and reduce power draw
-const int time=100;
+const int time_servo_switching=100;
 // Constant that contains the delay used by the subroutine blinkStatus()
 // Value must be greater then 0. 
 // input is in milliseconds. 1 second is equal to 1000 milliseconds
@@ -104,112 +104,112 @@ void display_num(int num=10) {
     case 0:
       // Displaying the number 0
       // By enabling servos 1, 2, 4, 5, 6 & 7
-      servo_object[0].write(max_servo_open); delay(time); // Digit 1
-      servo_object[1].write(max_servo_open); delay(time); // Digit 2
-      servo_object[2].write(min_servo_open); delay(time); // Digit 3
-      servo_object[3].write(max_servo_open); delay(time); // Digit 4
-      servo_object[4].write(max_servo_open); delay(time); // Digit 5
-      servo_object[5].write(max_servo_open); delay(time); // Digit 6
-      servo_object[6].write(max_servo_open); delay(time); // Digit 7
+      servo_object[0].write(max_servo_open); delay(time_servo_switching); // Digit 1
+      servo_object[1].write(max_servo_open); delay(time_servo_switching); // Digit 2
+      servo_object[2].write(min_servo_open); delay(time_servo_switching); // Digit 3
+      servo_object[3].write(max_servo_open); delay(time_servo_switching); // Digit 4
+      servo_object[4].write(max_servo_open); delay(time_servo_switching); // Digit 5
+      servo_object[5].write(max_servo_open); delay(time_servo_switching); // Digit 6
+      servo_object[6].write(max_servo_open); delay(time_servo_switching); // Digit 7
       break;
     case 1:
       // Displaying the number 1
       // By enabling servos 2 and 6
-      servo_object[0].write(min_servo_open); delay(time); // Digit 1
-      servo_object[1].write(min_servo_open); delay(time); // Digit 2
-      servo_object[2].write(max_servo_open); delay(time); // Digit 3
-      servo_object[3].write(min_servo_open); delay(time); // Digit 4
-      servo_object[4].write(min_servo_open); delay(time); // Digit 5
-      servo_object[5].write(min_servo_open); delay(time); // Digit 6
-      servo_object[6].write(max_servo_open); delay(time); // Digit 7
+      servo_object[0].write(min_servo_open); delay(time_servo_switching); // Digit 1
+      servo_object[1].write(min_servo_open); delay(time_servo_switching); // Digit 2
+      servo_object[2].write(max_servo_open); delay(time_servo_switching); // Digit 3
+      servo_object[3].write(min_servo_open); delay(time_servo_switching); // Digit 4
+      servo_object[4].write(min_servo_open); delay(time_servo_switching); // Digit 5
+      servo_object[5].write(min_servo_open); delay(time_servo_switching); // Digit 6
+      servo_object[6].write(max_servo_open); delay(time_servo_switching); // Digit 7
       break;
     case 2:
       // Displaying the number 2
       // By enabling servos 1, 2, 3, 4 & 5
-      servo_object[0].write(max_servo_open); delay(time); // Digit 1
-      servo_object[1].write(max_servo_open); delay(time); // Digit 2
-      servo_object[2].write(max_servo_open); delay(time); // Digit 3
-      servo_object[3].write(max_servo_open); delay(time); // Digit 4
-      servo_object[4].write(max_servo_open); delay(time); // Digit 5
-      servo_object[5].write(min_servo_open); delay(time); // Digit 6
-      servo_object[6].write(min_servo_open); delay(time); // Digit 7
+      servo_object[0].write(max_servo_open); delay(time_servo_switching); // Digit 1
+      servo_object[1].write(max_servo_open); delay(time_servo_switching); // Digit 2
+      servo_object[2].write(max_servo_open); delay(time_servo_switching); // Digit 3
+      servo_object[3].write(max_servo_open); delay(time_servo_switching); // Digit 4
+      servo_object[4].write(max_servo_open); delay(time_servo_switching); // Digit 5
+      servo_object[5].write(min_servo_open); delay(time_servo_switching); // Digit 6
+      servo_object[6].write(min_servo_open); delay(time_servo_switching); // Digit 7
       break;
     case 3:
       // Displaying the number 3
       // By enabling servos 1, 2, 3, 5 & 6
-      servo_object[0].write(max_servo_open); delay(time); // Digit 1
-      servo_object[1].write(max_servo_open); delay(time); // Digit 2
-      servo_object[2].write(max_servo_open); delay(time); // Digit 3
-      servo_object[3].write(min_servo_open); delay(time); // Digit 4
-      servo_object[4].write(max_servo_open); delay(time); // Digit 5
-      servo_object[5].write(max_servo_open); delay(time); // Digit 6
-      servo_object[6].write(min_servo_open); delay(time); // Digit 7
+      servo_object[0].write(max_servo_open); delay(time_servo_switching); // Digit 1
+      servo_object[1].write(max_servo_open); delay(time_servo_switching); // Digit 2
+      servo_object[2].write(max_servo_open); delay(time_servo_switching); // Digit 3
+      servo_object[3].write(min_servo_open); delay(time_servo_switching); // Digit 4
+      servo_object[4].write(max_servo_open); delay(time_servo_switching); // Digit 5
+      servo_object[5].write(max_servo_open); delay(time_servo_switching); // Digit 6
+      servo_object[6].write(min_servo_open); delay(time_servo_switching); // Digit 7
       break;
     case 4:
       // Displaying the number 4
       // By enabling servos 2, 3, 6 & 7
-      servo_object[0].write(min_servo_open); delay(time); // Digit 1
-      servo_object[1].write(max_servo_open); delay(time); // Digit 2
-      servo_object[2].write(max_servo_open); delay(time); // Digit 3
-      servo_object[3].write(min_servo_open); delay(time); // Digit 4
-      servo_object[4].write(min_servo_open); delay(time); // Digit 5
-      servo_object[5].write(max_servo_open); delay(time); // Digit 6
-      servo_object[6].write(max_servo_open); delay(time); // Digit 7
+      servo_object[0].write(min_servo_open); delay(time_servo_switching); // Digit 1
+      servo_object[1].write(max_servo_open); delay(time_servo_switching); // Digit 2
+      servo_object[2].write(max_servo_open); delay(time_servo_switching); // Digit 3
+      servo_object[3].write(min_servo_open); delay(time_servo_switching); // Digit 4
+      servo_object[4].write(min_servo_open); delay(time_servo_switching); // Digit 5
+      servo_object[5].write(max_servo_open); delay(time_servo_switching); // Digit 6
+      servo_object[6].write(max_servo_open); delay(time_servo_switching); // Digit 7
       break;
     case 5:
       // Displaying the number 5
       // By enabling servos 1, 3, 5, 6 & 7
-      servo_object[0].write(max_servo_open); delay(time); // Digit 1
-      servo_object[1].write(min_servo_open); delay(time); // Digit 2
-      servo_object[2].write(max_servo_open); delay(time); // Digit 3
-      servo_object[3].write(min_servo_open); delay(time); // Digit 4
-      servo_object[4].write(max_servo_open); delay(time); // Digit 5
-      servo_object[5].write(max_servo_open); delay(time); // Digit 6
-      servo_object[6].write(max_servo_open); delay(time); // Digit 7
+      servo_object[0].write(max_servo_open); delay(time_servo_switching); // Digit 1
+      servo_object[1].write(min_servo_open); delay(time_servo_switching); // Digit 2
+      servo_object[2].write(max_servo_open); delay(time_servo_switching); // Digit 3
+      servo_object[3].write(min_servo_open); delay(time_servo_switching); // Digit 4
+      servo_object[4].write(max_servo_open); delay(time_servo_switching); // Digit 5
+      servo_object[5].write(max_servo_open); delay(time_servo_switching); // Digit 6
+      servo_object[6].write(max_servo_open); delay(time_servo_switching); // Digit 7
       break;
     case 6:
       // Displaying the number 6
       // By enabling servos 1, 3, 4, 5, 6 & 7
-      servo_object[0].write(max_servo_open); delay(time); // Digit 1
-      servo_object[1].write(min_servo_open); delay(time); // Digit 2
-      servo_object[2].write(max_servo_open); delay(time); // Digit 3
-      servo_object[3].write(max_servo_open); delay(time); // Digit 4
-      servo_object[4].write(max_servo_open); delay(time); // Digit 5
-      servo_object[5].write(max_servo_open); delay(time); // Digit 6
-      servo_object[6].write(max_servo_open); delay(time); // Digit 7
+      servo_object[0].write(max_servo_open); delay(time_servo_switching); // Digit 1
+      servo_object[1].write(min_servo_open); delay(time_servo_switching); // Digit 2
+      servo_object[2].write(max_servo_open); delay(time_servo_switching); // Digit 3
+      servo_object[3].write(max_servo_open); delay(time_servo_switching); // Digit 4
+      servo_object[4].write(max_servo_open); delay(time_servo_switching); // Digit 5
+      servo_object[5].write(max_servo_open); delay(time_servo_switching); // Digit 6
+      servo_object[6].write(max_servo_open); delay(time_servo_switching); // Digit 7
       break;
     case 7:
       // Displaying the number 7
       // By enabling servos 1, 2 & 6
-      servo_object[0].write(max_servo_open); delay(time); // Digit 1
-      servo_object[1].write(max_servo_open); delay(time); // Digit 2
-      servo_object[2].write(min_servo_open); delay(time); // Digit 3
-      servo_object[3].write(min_servo_open); delay(time); // Digit 4
-      servo_object[4].write(min_servo_open); delay(time); // Digit 5
-      servo_object[5].write(max_servo_open); delay(time); // Digit 6
-      servo_object[6].write(min_servo_open); delay(time); // Digit 7
+      servo_object[0].write(max_servo_open); delay(time_servo_switching); // Digit 1
+      servo_object[1].write(max_servo_open); delay(time_servo_switching); // Digit 2
+      servo_object[2].write(min_servo_open); delay(time_servo_switching); // Digit 3
+      servo_object[3].write(min_servo_open); delay(time_servo_switching); // Digit 4
+      servo_object[4].write(min_servo_open); delay(time_servo_switching); // Digit 5
+      servo_object[5].write(max_servo_open); delay(time_servo_switching); // Digit 6
+      servo_object[6].write(min_servo_open); delay(time_servo_switching); // Digit 7
       break;
     case 8:
       // Displaying the number 8
       // By enabling all servos
-      servo_object[0].write(max_servo_open); delay(time); // Digit 1
-      servo_object[1].write(max_servo_open); delay(time); // Digit 2
-      servo_object[2].write(max_servo_open); delay(time); // Digit 3
-      servo_object[3].write(max_servo_open); delay(time); // Digit 4
-      servo_object[4].write(max_servo_open); delay(time); // Digit 5
-      servo_object[5].write(max_servo_open); delay(time); // Digit 6
-      servo_object[6].write(max_servo_open); delay(time); // Digit 7
+      servo_object[0].write(max_servo_open); delay(time_servo_switching); // Digit 1
+      servo_object[1].write(max_servo_open); delay(time_servo_switching); // Digit 2
+      servo_object[2].write(max_servo_open); delay(time_servo_switching); // Digit 3
+      servo_object[3].write(max_servo_open); delay(time_servo_switching); // Digit 4
+      servo_object[4].write(max_servo_open); delay(time_servo_switching); // Digit 5
+      servo_object[5].write(max_servo_open); delay(time_servo_switching); // Digit 6
+      servo_object[6].write(max_servo_open); delay(time_servo_switching); // Digit 7
       break;
     case 9:
       // Displaying the number 9
       // By enabling servos 1, 2, 3, 5, 6 & 7
-      servo_object[0].write(max_servo_open); delay(time); // Digit 1
-      servo_object[1].write(max_servo_open); delay(time); // Digit 2
-      servo_object[2].write(max_servo_open); delay(time); // Digit 3
-      servo_object[3].write(min_servo_open); delay(time); // Digit 4
-      servo_object[4].write(max_servo_open); delay(time); // Digit 5
-      servo_object[5].write(max_servo_open); delay(time); // Digit 6
-      servo_object[6].write(max_servo_open); delay(time); // Digit 7
+      servo_object[0].write(max_servo_open); delay(time_servo_switching); // Digit 1
+      servo_object[1].write(max_servo_open); delay(time_servo_switching); // Digit 2
+      servo_object[2].write(max_servo_open); delay(time_servo_switching); // Digit 3
+      servo_object[3].write(min_servo_open); delay(time_servo_switching); // Digit 4
+      servo_object[4].write(max_servo_open); delay(time_servo_switching); // Digit 5
+      servo_object[5].write(max_servo_open); delay(time_servo_switching); // Digit 6
+      servo_object[6].write(max_servo_open); delay(time_servo_switching); // Digit 7
       break;
   }
   // Blinks the debug LED once to help with visual debugging
